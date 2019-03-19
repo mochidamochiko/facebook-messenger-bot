@@ -24,6 +24,18 @@ def verification():
         print("Wrong verification token!")
         return "Wrong validation token"
 
+@app.route('/webhook', methods=['POST'])
+def getMessage():
+    data = request.get_json()
+    if data["object"] == "page":
+        for entry in data["entry"]:
+            for messaging_event in entry["messaging"]:
+                if messaging_event.get("message"):  
+                    message_text = messaging_event["message"]
+                    print(message_text)
+
+    return "echo: {}".format(message_text)
+
 
 # bashで叩いたかimportで入れたかを判定する
 if __name__ == '__main__':

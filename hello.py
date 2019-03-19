@@ -17,7 +17,6 @@ def index():
 
 @app.route('/webhook', methods=['GET'])
 def verification():
-
     if (request.args.get('hub.verify_token', '') == VERIFY_TOKEN):     
         print("succefully verified")
         return request.args.get('hub.challenge', '')
